@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native';
 
 import Matcha from '../assets/matcha.svg';
 import Wreath from '../assets/wreath.svg';
@@ -28,7 +28,11 @@ export const TokenCard: React.FC<TokenCardProps> = ({
   )}%`;
   return (
     <View style={styles.wrapper}>
-      <View style={styles.card}>
+      <ImageBackground
+        source={require('../assets/card-bg.png')}
+        style={styles.card}
+        imageStyle={styles.cardBgImage}
+      >
         <View style={styles.iconRow}>
           <Wreath width={32} height={64} style={styles.wreathLeft} />
           <View style={styles.logoCircle}>
@@ -73,7 +77,7 @@ export const TokenCard: React.FC<TokenCardProps> = ({
             leftIcon={<Matcha width={18} height={18} />}
           />
         </View>
-      </View>
+      </ImageBackground>
     </View>
   );
 };
@@ -85,6 +89,7 @@ const styles = StyleSheet.create({
     borderRadius: 28,
     padding: 24,
     alignItems: 'center',
+    overflow: 'hidden',
   },
   iconRow: {
     flexDirection: 'row',
@@ -119,6 +124,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   cardButton: {width: '100%', marginTop: 16},
+  cardBgImage: {
+    borderRadius: 28,
+    resizeMode: 'cover',
+  },
   logoImage: {
     width: 76,
     height: 76,

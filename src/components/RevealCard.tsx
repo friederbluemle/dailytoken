@@ -1,5 +1,12 @@
 import React, {useEffect, useRef} from 'react';
-import {Animated, Easing, StyleSheet, Text, View} from 'react-native';
+import {
+  Animated,
+  Easing,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 import MagicWand from '../assets/magic-wand.svg';
 import QuestionMark from '../assets/question-mark.svg';
@@ -52,8 +59,10 @@ const RevealCard: React.FC<RevealCardProps> = ({
 
   return (
     <View style={styles.wrapper}>
-      <View
+      <ImageBackground
+        source={require('../assets/card-bg.png')}
         style={styles.card}
+        imageStyle={styles.cardBgImage}
         accessible
         accessibilityLabel="Mystery token card"
       >
@@ -89,7 +98,7 @@ const RevealCard: React.FC<RevealCardProps> = ({
             leftIcon={<MagicWand width={18} height={18} />}
           />
         </View>
-      </View>
+      </ImageBackground>
     </View>
   );
 };
@@ -104,6 +113,7 @@ const styles = StyleSheet.create({
     borderRadius: 28,
     padding: 24,
     alignItems: 'center',
+    overflow: 'hidden',
   },
   iconRow: {
     flexDirection: 'row',
@@ -161,5 +171,9 @@ const styles = StyleSheet.create({
   },
   cardButton: {
     width: '100%',
+  },
+  cardBgImage: {
+    borderRadius: 28,
+    resizeMode: 'cover',
   },
 });
