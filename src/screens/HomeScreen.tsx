@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 
+import LottieView from 'lottie-react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {DailyHeader, RevealCard, TokenCard} from '../components';
@@ -40,6 +41,7 @@ export const HomeScreen = () => {
   const [revealed, setRevealed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [remainingMs, setRemainingMs] = useState<number | null>(null);
+  const [showConfetti, setShowConfetti] = useState(false);
   const tokenAnim = useRef(new Animated.Value(0)).current;
 
   const token = {
@@ -56,14 +58,18 @@ export const HomeScreen = () => {
     tokenAnim.setValue(0);
     setTimeout(() => {
       setLoading(false);
+      setShowConfetti(true);
       setRevealed(true);
       setRemainingMs(msUntilNextUtcMidnight());
-      Animated.timing(tokenAnim, {
-        toValue: 1,
-        duration: 250,
-        useNativeDriver: true,
-      }).start();
-    }, 800);
+      // Defer only the animation start to the next frame
+      requestAnimationFrame(() => {
+        Animated.timing(tokenAnim, {
+          toValue: 1,
+          duration: 250,
+          useNativeDriver: true,
+        }).start();
+      });
+    }, 1000);
   };
 
   // Tick countdown when revealed
@@ -163,6 +169,32 @@ export const HomeScreen = () => {
           For discovery & entertainment. Not investment advice.
         </Text>
       </View>
+      {/* Preload confetti composition to avoid first-play jank */}
+      <LottieView
+        source={require('../assets/lottie/confetti.json')}
+        autoPlay={false}
+        loop={false}
+        cacheComposition
+        style={{position: 'absolute', width: 1, height: 1, opacity: 0}}
+      />
+      {showConfetti ? (
+        <View
+          pointerEvents="none"
+          style={styles.confettiOverlay}
+          accessibilityLabel="Confetti celebration"
+          accessibilityLiveRegion="polite"
+        >
+          <LottieView
+            source={require('../assets/lottie/confetti.json')}
+            autoPlay
+            loop={false}
+            resizeMode="cover"
+            style={StyleSheet.absoluteFillObject}
+            cacheComposition
+            onAnimationFinish={() => setShowConfetti(false)}
+          />
+        </View>
+      ) : null}
     </SafeAreaView>
   );
 };
@@ -188,5 +220,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#9ca3af',
     fontSize: 12,
+  },
+  confettiOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

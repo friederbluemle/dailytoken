@@ -18,7 +18,7 @@ describe('HomeScreen', () => {
     render(<HomeScreen />);
     fireEvent.press(screen.getByText('Reveal'));
     await act(async () => {
-      jest.advanceTimersByTime(800);
+      jest.advanceTimersByTime(1000);
     });
     expect(screen.getByText('Plasma')).toBeOnTheScreen();
     expect(screen.getByText('Trade on Matcha')).toBeOnTheScreen();
