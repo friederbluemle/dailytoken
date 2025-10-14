@@ -32,3 +32,5 @@ jest.mock('react-native', () => {
   };
   return rn;
 });
+
+jest.mock('lottie-react-native', () => 'LottieView');
