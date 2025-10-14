@@ -10,6 +10,12 @@ export interface ApiTokenResponse {
   price?: number; // USD
   priceChange?: number; // absolute delta in USD (not used)
   priceChangePercentage?: number; // percent change 24h
+  marketCap?: number; // USD
+  fullyDilutedValuation?: number; // USD
+  totalVolume?: number; // USD
+  totalSupply?: number;
+  circulatingSupply?: number;
+  holders?: number;
 }
 
 export interface DailyToken {
@@ -20,4 +26,10 @@ export interface DailyToken {
   chainSlug: string; // e.g., 'ethereum', 'bsc'
   priceUsd: number;
   changePct: number;
+  marketCapUsd?: number;
+  fdvUsd?: number;
+  volumeUsd?: number;
+  totalSupply?: number;
+  circulatingSupply?: number;
+  holdersCount?: number;
 }
