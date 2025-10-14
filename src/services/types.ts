@@ -1,0 +1,23 @@
+export interface ApiTokenResponse {
+  id?: string;
+  address?: string; // main contract address
+  name?: string;
+  description?: string;
+  symbol?: string;
+  chainId?: number; // e.g., 1 (Ethereum), 56 (BSC), 137 (Polygon)
+  categories?: string[];
+  logo?: string;
+  price?: number; // USD
+  priceChange?: number; // absolute delta in USD (not used)
+  priceChangePercentage?: number; // percent change 24h
+}
+
+export interface DailyToken {
+  id: string;
+  name: string;
+  symbol: string;
+  contractAddress: string;
+  chainSlug: string; // e.g., 'ethereum', 'bsc'
+  priceUsd: number;
+  changePct: number;
+}

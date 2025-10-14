@@ -12,6 +12,7 @@ import LottieView from 'lottie-react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {DailyHeader, RevealCard, TokenCard} from '../components';
+import {getDailyToken} from '../services/client';
 import {buildMatchaTradeUrl} from '../utils';
 
 function msUntilNextUtcMidnight(now: Date = new Date()): number {
@@ -38,30 +39,35 @@ function formatHms(ms: number): {h: number; m: number; s: number} {
 }
 
 export const HomeScreen = () => {
-  const [revealed, setRevealed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [remainingMs, setRemainingMs] = useState<number | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
   const tokenAnim = useRef(new Animated.Value(0)).current;
 
-  const token = {
-    name: 'Plasma',
-    symbol: 'XPL',
-    priceUsd: 0.8964,
-    changePct: 7.18,
-    // Example ERC-20 address on Ethereum (WETH)
-    contractAddress: '0x405fbc9004d857903bfd6b3357792d71a50726b0',
-  };
+  const [token, setToken] = useState<{
+    name: string;
+    symbol: string;
+    priceUsd: number;
+    changePct: number;
+    contractAddress: string;
+    chainSlug: string;
+  } | null>(null);
 
-  const handleReveal = () => {
-    setLoading(true);
-    tokenAnim.setValue(0);
-    setTimeout(() => {
-      setLoading(false);
+  const handleReveal = async () => {
+    try {
+      setLoading(true);
+      tokenAnim.setValue(0);
+      const data = await getDailyToken();
+      setToken({
+        name: data.name,
+        symbol: data.symbol,
+        priceUsd: data.priceUsd,
+        changePct: data.changePct,
+        contractAddress: data.contractAddress,
+        chainSlug: data.chainSlug,
+      });
       setShowConfetti(true);
-      setRevealed(true);
       setRemainingMs(msUntilNextUtcMidnight());
-      // Defer only the animation start to the next frame
       requestAnimationFrame(() => {
         Animated.timing(tokenAnim, {
           toValue: 1,
@@ -69,12 +75,16 @@ export const HomeScreen = () => {
           useNativeDriver: true,
         }).start();
       });
-    }, 1000);
+    } catch (e) {
+      // In a real app, show a user-friendly error. For now, simply reset loading state.
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // Tick countdown when revealed
+  // Tick countdown when a token is present
   useEffect(() => {
-    if (!revealed) {
+    if (!token) {
       setRemainingMs(null);
       return;
     }
@@ -85,14 +95,14 @@ export const HomeScreen = () => {
         const nextVal = (curr == null ? msUntilNextUtcMidnight() : curr) - 1000;
         if (nextVal <= 0) {
           clearInterval(id);
-          setRevealed(false);
+          setToken(null);
           return 0;
         }
         return nextVal;
       });
     }, 1000);
     return () => clearInterval(id);
-  }, [revealed]);
+  }, [token]);
 
   const time = useMemo(() => {
     if (remainingMs == null) {
@@ -103,7 +113,7 @@ export const HomeScreen = () => {
     return {h, m, s, label: `Next reveal in ${h}h : ${pad(m)}m : ${pad(s)}s`};
   }, [remainingMs]);
 
-  const date = revealed
+  const date = token
     ? new Date().toLocaleDateString(undefined, {
         month: 'short',
         day: '2-digit',
@@ -114,7 +124,7 @@ export const HomeScreen = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         <DailyHeader dateLabel={date} />
-        {revealed ? (
+        {token ? (
           <>
             <Animated.View
               style={{
@@ -138,7 +148,7 @@ export const HomeScreen = () => {
                   const url = buildMatchaTradeUrl(
                     token.contractAddress,
                     '20',
-                    'bsc',
+                    token.chainSlug,
                   );
                   if (!url) {
                     return;
@@ -157,7 +167,7 @@ export const HomeScreen = () => {
             <RevealCard loading={loading} onReveal={handleReveal} />
           </>
         )}
-        {revealed && time?.label ? (
+        {token && time?.label ? (
           <Text style={styles.countdown} accessibilityLiveRegion="polite">
             {time.label}
           </Text>

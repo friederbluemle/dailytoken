@@ -1,0 +1,19 @@
+{
+  "id": "foobar-dao",
+  "address": "0xf003d125a4f7849a1b059e64f4517a86dd60c95d",
+  "name": "FOOBAR",
+  "description": "FOOBAR Chain is The World's First RWA Layer 1 Blockchain.",
+  "symbol": "fb",
+  "chainId": 1,
+  "categories": ["Infrastructure", "Foobar Ecosystem"],
+  "logo": "https://coin-images.coingecko.com/coins/images/12151/large/FB_Token.png?1696511991",
+  "price": 0.142203,
+  "priceChange": 0.01004024,
+  "priceChangePercentage": 7.59685,
+  "marketCap": 157584859,
+  "fullyDilutedValuation": 246773648,
+  "totalVolume": 319453980,
+  "totalSupply": 1705517438.311534,
+  "circulatingSupply": 1089110314.905473,
+  "summary": "FB is trending as the real‑world‑asset narrative heats up again."
+}
