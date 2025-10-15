@@ -61,6 +61,7 @@ export async function getDailyToken(): Promise<DailyToken> {
     chainSlug,
     priceUsd,
     changePct,
+    logoUrl: json.logo,
     marketCapUsd: json.marketCap,
     fdvUsd: json.fullyDilutedValuation,
     volumeUsd: json.totalVolume,

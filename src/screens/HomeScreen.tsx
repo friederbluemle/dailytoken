@@ -52,6 +52,7 @@ export const HomeScreen = () => {
     changePct: number;
     contractAddress: string;
     chainSlug: string;
+    logoUrl?: string;
     marketCapUsd?: number;
     fdvUsd?: number;
     volumeUsd?: number;
@@ -72,6 +73,7 @@ export const HomeScreen = () => {
         changePct: data.changePct,
         contractAddress: data.contractAddress,
         chainSlug: data.chainSlug,
+        logoUrl: data.logoUrl,
         marketCapUsd: data.marketCapUsd,
         fdvUsd: data.fdvUsd,
         volumeUsd: data.volumeUsd,
@@ -157,6 +159,7 @@ export const HomeScreen = () => {
                 symbol={token.symbol}
                 priceUsd={token.priceUsd}
                 changePct={token.changePct}
+                logoUrl={token.logoUrl}
                 onTrade={async () => {
                   const url = buildMatchaTradeUrl(
                     token.contractAddress,

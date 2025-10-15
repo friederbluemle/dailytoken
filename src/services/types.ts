@@ -26,6 +26,7 @@ export interface DailyToken {
   chainSlug: string; // e.g., 'ethereum', 'bsc'
   priceUsd: number;
   changePct: number;
+  logoUrl?: string;
   marketCapUsd?: number;
   fdvUsd?: number;
   volumeUsd?: number;
