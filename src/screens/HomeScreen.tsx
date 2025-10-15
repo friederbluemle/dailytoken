@@ -13,6 +13,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {DailyHeader, RevealCard, TokenCard} from '../components';
 import {MainFacts} from '../components/MainFacts.tsx';
+import {Summary} from '../components/Summary';
 import {TokenStats} from '../components/TokenStats';
 import {getDailyToken} from '../services/client';
 import {buildMatchaTradeUrl} from '../utils';
@@ -62,6 +63,7 @@ export const HomeScreen = () => {
     circulatingSupply?: number;
     holdersCount?: number;
     resources?: {title: string; url: string}[];
+    summary?: string;
   } | null>(null);
 
   const handleReveal = async () => {
@@ -85,6 +87,7 @@ export const HomeScreen = () => {
         circulatingSupply: data.circulatingSupply,
         holdersCount: data.holdersCount,
         resources: data.resources,
+        summary: data.summary,
       });
       setShowConfetti(true);
       setRemainingMs(msUntilNextUtcMidnight());
@@ -196,6 +199,7 @@ export const HomeScreen = () => {
               circulatingSupply={token.circulatingSupply}
               symbol={token.symbol}
             />
+            <Summary summary={token.summary} />
             {token.resources && token.resources.length > 0 ? (
               <MainFacts resources={token.resources} />
             ) : null}

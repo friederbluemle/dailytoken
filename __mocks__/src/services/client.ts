@@ -33,6 +33,7 @@ export async function getDailyToken(): Promise<DailyToken> {
     resources: Array.isArray(json.resources)
       ? json.resources.filter((r: any) => r && r.title && r.url)
       : undefined,
+    summary: json.summary,
   };
   return token;
 }
