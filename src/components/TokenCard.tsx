@@ -56,7 +56,7 @@ export const TokenCard: React.FC<TokenCardProps> = ({
         <View style={styles.nameRow}>
           <Text style={styles.name}>{name}</Text>
           <Text style={styles.dot}> · </Text>
-          <Text style={styles.symbol}>{symbol}</Text>
+          <Text style={styles.symbol}>{symbol.toUpperCase()}</Text>
         </View>
         <View style={styles.rowCenter}>
           <Text style={styles.price}>${priceUsd.toFixed(4)}</Text>
@@ -85,7 +85,7 @@ export const TokenCard: React.FC<TokenCardProps> = ({
 const styles = StyleSheet.create({
   wrapper: {paddingHorizontal: 24},
   card: {
-    backgroundColor: '#0b3b33',
+    backgroundColor: '#000',
     borderRadius: 28,
     padding: 24,
     alignItems: 'center',
@@ -95,32 +95,37 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 4,
+    marginTop: 24,
     marginBottom: 10,
   },
-  wreathLeft: {marginRight: 8},
-  wreathRight: {marginLeft: 8, transform: [{scaleX: -1}]},
+  wreathLeft: {marginRight: 12},
+  wreathRight: {marginLeft: 12, transform: [{scaleX: -1}]},
   logoCircle: {
     width: 100,
     height: 100,
     borderRadius: 50,
     borderWidth: 1,
-    borderColor: '#83c5be55',
+    borderColor: '#162F29',
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
   },
-  nameRow: {flexDirection: 'row', alignItems: 'center', marginTop: 6},
-  name: {color: '#d1fae5', fontSize: 14},
-  dot: {color: '#d1fae5', opacity: 0.8},
-  symbol: {color: '#d1fae5', fontSize: 14, opacity: 0.9},
-  rowCenter: {flexDirection: 'row', alignItems: 'center', marginTop: 12},
-  price: {color: '#ffffff', fontSize: 22, fontWeight: '700'},
+  nameRow: {flexDirection: 'row', alignItems: 'center', marginTop: 16},
+  name: {color: '#ffffff', fontSize: 18, fontWeight: '500'},
+  dot: {color: '#ffffff', fontSize: 18, fontWeight: '500'},
+  symbol: {color: '#ffffff', fontSize: 18, fontWeight: '500'},
+  rowCenter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+    marginBottom: 16,
+  },
+  price: {color: '#ffffff', fontSize: 26, fontWeight: '500'},
   change: {
     marginLeft: 8,
-    fontSize: 12,
+    marginTop: 2,
+    fontSize: 16,
     paddingHorizontal: 8,
-    paddingVertical: 4,
     borderRadius: 10,
   },
   cardButton: {width: '100%', marginTop: 16},
@@ -129,9 +134,9 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   logoImage: {
-    width: 76,
-    height: 76,
-    borderRadius: 38,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
   },
   logoTicker: {
     color: '#d1fae5',

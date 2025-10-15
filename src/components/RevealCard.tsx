@@ -10,7 +10,6 @@ import {
 
 import MagicWand from '../assets/magic-wand.svg';
 import QuestionMark from '../assets/question-mark.svg';
-import Wreath from '../assets/wreath.svg';
 import {Button} from './Button';
 
 interface RevealCardProps {
@@ -67,7 +66,6 @@ const RevealCard: React.FC<RevealCardProps> = ({
         accessibilityLabel="Mystery token card"
       >
         <View style={styles.iconRow}>
-          <Wreath width={32} height={64} style={styles.wreathLeft} />
           <View style={styles.mysteryWrap}>
             <View style={styles.spinnerWrap} pointerEvents="none">
               {loading ? (
@@ -79,13 +77,12 @@ const RevealCard: React.FC<RevealCardProps> = ({
             </View>
             <View style={styles.mysteryCircle}>
               <QuestionMark
-                width={56}
-                height={56}
+                width={100}
+                height={100}
                 accessibilityElementsHidden
               />
             </View>
           </View>
-          <Wreath width={32} height={64} style={styles.wreathRight} />
         </View>
         <Text style={styles.label}>Reveal token for</Text>
         <Text style={styles.dateLabel}>{date}</Text>
@@ -119,35 +116,32 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 4,
-    marginBottom: 10,
+    margin: 24,
   },
-  wreathLeft: {marginRight: 8},
-  wreathRight: {marginLeft: 8, transform: [{scaleX: -1}]},
   mysteryWrap: {
     alignItems: 'center',
     justifyContent: 'center',
   },
   spinnerWrap: {
     position: 'absolute',
-    width: 140,
-    height: 140,
+    width: 128,
+    height: 128,
     borderRadius: 70,
     alignItems: 'center',
     justifyContent: 'center',
   },
   spinnerRing: {
     position: 'absolute',
-    width: 140,
-    height: 140,
+    width: 128,
+    height: 128,
     borderRadius: 70,
     borderWidth: 3,
     borderColor: '#e5e7eb55',
     borderTopColor: '#e5e7eb',
   },
   mysteryCircle: {
-    width: 104,
-    height: 104,
+    width: 100,
+    height: 100,
     borderRadius: 52,
     backgroundColor: '#111111',
     borderWidth: 1,
@@ -156,18 +150,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   label: {
-    color: '#9ca3af',
+    color: '#FFFFFF52',
     fontSize: 18,
-    fontWeight: '600',
-    marginTop: 4,
-    marginBottom: 8,
+    fontWeight: '500',
   },
   dateLabel: {
-    color: '#e5e7eb',
+    color: '#fff',
     fontSize: 28,
-    fontWeight: '600',
-    marginTop: 4,
-    marginBottom: 24,
+    fontWeight: '500',
+    marginTop: 8,
+    marginBottom: 40,
   },
   cardButton: {
     width: '100%',
