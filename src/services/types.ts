@@ -24,6 +24,7 @@ export interface DailyToken {
   symbol: string;
   contractAddress: string;
   chainSlug: string; // e.g., 'ethereum', 'bsc'
+  chainId: number; // e.g., 1, 56
   priceUsd: number;
   changePct: number;
   logoUrl?: string;

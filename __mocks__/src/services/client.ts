@@ -26,7 +26,8 @@ export async function getDailyToken(): Promise<DailyToken> {
     name: json.name ?? 'Unknown',
     symbol: json.symbol ?? 'TKN',
     contractAddress: json.address ?? '',
-    chainSlug: chainIdToSlug(json.chainId),
+    chainSlug: chainIdToSlug(json.chainId) ?? 'ethereum',
+    chainId: json.chainId ?? 1,
     priceUsd: json.price ?? 0,
     changePct: json.priceChangePercentage ?? 0,
   };

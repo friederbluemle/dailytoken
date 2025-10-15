@@ -52,6 +52,7 @@ export const HomeScreen = () => {
     changePct: number;
     contractAddress: string;
     chainSlug: string;
+    chainId: number;
     logoUrl?: string;
     marketCapUsd?: number;
     fdvUsd?: number;
@@ -73,6 +74,7 @@ export const HomeScreen = () => {
         changePct: data.changePct,
         contractAddress: data.contractAddress,
         chainSlug: data.chainSlug,
+        chainId: data.chainId,
         logoUrl: data.logoUrl,
         marketCapUsd: data.marketCapUsd,
         fdvUsd: data.fdvUsd,
@@ -164,7 +166,7 @@ export const HomeScreen = () => {
                   const url = buildMatchaTradeUrl(
                     token.contractAddress,
                     '20',
-                    token.chainSlug,
+                    token.chainId,
                   );
                   if (!url) {
                     return;
