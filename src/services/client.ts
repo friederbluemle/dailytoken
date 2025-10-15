@@ -59,6 +59,7 @@ export async function getDailyToken(): Promise<DailyToken> {
     symbol,
     contractAddress,
     chainSlug,
+    chainId: json.chainId ?? 1,
     priceUsd,
     changePct,
     logoUrl: json.logo,

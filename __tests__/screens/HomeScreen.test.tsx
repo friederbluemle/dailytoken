@@ -15,6 +15,7 @@ jest.mock('../../src/services/client', () => {
       symbol: json.symbol,
       contractAddress: json.address,
       chainSlug: 'ethereum',
+      chainId: json.chainId,
       priceUsd: json.price,
       changePct: json.priceChangePercentage,
     })),
