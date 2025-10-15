@@ -1,4 +1,4 @@
-import {ApiTokenResponse, DailyToken} from './types';
+import {ApiTokenResponse, DailyToken, NewsResource} from './types';
 
 // Default production endpoint; can be overridden via env var
 const DEFAULT_ENDPOINT =
@@ -69,5 +69,8 @@ export async function getDailyToken(): Promise<DailyToken> {
     totalSupply: json.totalSupply,
     circulatingSupply: json.circulatingSupply,
     holdersCount: json.holders,
+    resources: Array.isArray(json.resources)
+      ? (json.resources.filter(r => r && r.title && r.url) as NewsResource[])
+      : undefined,
   };
 }

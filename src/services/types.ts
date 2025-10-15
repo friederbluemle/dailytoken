@@ -1,3 +1,8 @@
+export interface NewsResource {
+  title: string;
+  url: string;
+}
+
 export interface ApiTokenResponse {
   id?: string;
   address?: string; // main contract address
@@ -16,6 +21,7 @@ export interface ApiTokenResponse {
   totalSupply?: number;
   circulatingSupply?: number;
   holders?: number;
+  resources?: NewsResource[];
 }
 
 export interface DailyToken {
@@ -34,4 +40,5 @@ export interface DailyToken {
   totalSupply?: number;
   circulatingSupply?: number;
   holdersCount?: number;
+  resources?: NewsResource[];
 }
