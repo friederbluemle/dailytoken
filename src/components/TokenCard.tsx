@@ -1,8 +1,7 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 
 import Matcha from '../assets/matcha.svg';
-import Plasma from '../assets/plasma.svg';
 import Wreath from '../assets/wreath.svg';
 import {Button} from './Button';
 
@@ -12,6 +11,7 @@ interface TokenCardProps {
   priceUsd: number;
   changePct: number; // e.g., 7.18 means +7.18%
   onTrade: () => void;
+  logoUrl?: string;
 }
 
 export const TokenCard: React.FC<TokenCardProps> = ({
@@ -20,6 +20,7 @@ export const TokenCard: React.FC<TokenCardProps> = ({
   priceUsd,
   changePct,
   onTrade,
+  logoUrl,
 }) => {
   const changeColor = changePct >= 0 ? '#10b981' : '#ef4444';
   const badge = `${changePct >= 0 ? '▲' : '▼'} ${Math.abs(changePct).toFixed(
@@ -31,7 +32,20 @@ export const TokenCard: React.FC<TokenCardProps> = ({
         <View style={styles.iconRow}>
           <Wreath width={32} height={64} style={styles.wreathLeft} />
           <View style={styles.logoCircle}>
-            <Plasma width={76} height={76} accessibilityElementsHidden />
+            {logoUrl ? (
+              <Image
+                source={{uri: logoUrl}}
+                style={styles.logoImage}
+                resizeMode="cover"
+                accessibilityIgnoresInvertColors
+                accessible
+                accessibilityLabel="Token logo"
+              />
+            ) : (
+              <Text style={styles.logoTicker} accessibilityLabel="Token ticker">
+                {symbol?.toUpperCase()}
+              </Text>
+            )}
           </View>
           <Wreath width={32} height={64} style={styles.wreathRight} />
         </View>
@@ -89,6 +103,7 @@ const styles = StyleSheet.create({
     borderColor: '#83c5be55',
     alignItems: 'center',
     justifyContent: 'center',
+    overflow: 'hidden',
   },
   nameRow: {flexDirection: 'row', alignItems: 'center', marginTop: 6},
   name: {color: '#d1fae5', fontSize: 14},
@@ -104,4 +119,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   cardButton: {width: '100%', marginTop: 16},
+  logoImage: {
+    width: 76,
+    height: 76,
+    borderRadius: 38,
+  },
+  logoTicker: {
+    color: '#d1fae5',
+    fontSize: 28,
+    fontWeight: '700',
+  },
 });
