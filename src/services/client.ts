@@ -72,5 +72,6 @@ export async function getDailyToken(): Promise<DailyToken> {
     resources: Array.isArray(json.resources)
       ? (json.resources.filter(r => r && r.title && r.url) as NewsResource[])
       : undefined,
+    summary: json.summary,
   };
 }

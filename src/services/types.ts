@@ -22,6 +22,7 @@ export interface ApiTokenResponse {
   circulatingSupply?: number;
   holders?: number;
   resources?: NewsResource[];
+  summary?: string;
 }
 
 export interface DailyToken {
@@ -41,4 +42,5 @@ export interface DailyToken {
   circulatingSupply?: number;
   holdersCount?: number;
   resources?: NewsResource[];
+  summary?: string;
 }
