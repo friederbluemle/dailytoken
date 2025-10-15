@@ -76,7 +76,7 @@ export const TokenStats: React.FC<TokenStatsProps> = ({
     <View style={styles.container} accessibilityRole="summary">
       <View style={styles.headerRow}>
         <Text style={styles.headerLeft}>Token stats</Text>
-        <Text style={styles.headerRight}>Dex Screener</Text>
+        <Text style={styles.headerRight}>CoinGecko</Text>
       </View>
       <View style={styles.divider} />
       <View style={styles.grid}>
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 14,
   },
-  headerLeft: {fontSize: 16, fontWeight: '700', color: '#111827'},
+  headerLeft: {fontSize: 14, fontWeight: '500', color: '#111827'},
   headerRight: {fontSize: 13, color: '#9ca3af'},
   divider: {height: StyleSheet.hairlineWidth, backgroundColor: '#e5e7eb'},
   grid: {
@@ -139,6 +139,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#e5e7eb',
   },
-  label: {fontSize: 13, color: '#6b7280', marginBottom: 6},
-  value: {fontSize: 20, color: '#111827', fontWeight: '700'},
+  label: {fontSize: 14, color: '#00000080', marginBottom: 6, fontWeight: '400'},
+  value: {fontSize: 18, color: '#000', fontWeight: '500'},
 });

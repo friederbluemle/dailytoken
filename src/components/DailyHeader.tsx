@@ -27,12 +27,13 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
   title: {
-    fontSize: 22,
-    fontWeight: '700',
+    fontSize: 32,
+    fontWeight: '600',
     color: '#0a0a0a',
+    paddingVertical: 16,
   },
   date: {
-    fontSize: 12,
-    color: '#6b7280',
+    fontSize: 14,
+    color: '#000',
   },
 });

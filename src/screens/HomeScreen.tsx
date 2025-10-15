@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
   content: {paddingBottom: 24},
   countdown: {
     textAlign: 'center',
-    color: '#9ca3af',
+    color: '#00000080',
     marginTop: 8,
     fontSize: 13,
   },
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     textAlign: 'center',
-    color: '#9ca3af',
+    color: '#00000080',
     fontSize: 12,
   },
   confettiOverlay: {
