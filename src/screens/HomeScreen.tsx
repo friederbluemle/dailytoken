@@ -12,6 +12,7 @@ import LottieView from 'lottie-react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {DailyHeader, RevealCard, TokenCard} from '../components';
+import {MainFacts} from '../components/MainFacts.tsx';
 import {TokenStats} from '../components/TokenStats';
 import {getDailyToken} from '../services/client';
 import {buildMatchaTradeUrl} from '../utils';
@@ -60,6 +61,7 @@ export const HomeScreen = () => {
     totalSupply?: number;
     circulatingSupply?: number;
     holdersCount?: number;
+    resources?: {title: string; url: string}[];
   } | null>(null);
 
   const handleReveal = async () => {
@@ -82,6 +84,7 @@ export const HomeScreen = () => {
         totalSupply: data.totalSupply,
         circulatingSupply: data.circulatingSupply,
         holdersCount: data.holdersCount,
+        resources: data.resources,
       });
       setShowConfetti(true);
       setRemainingMs(msUntilNextUtcMidnight());
@@ -193,6 +196,9 @@ export const HomeScreen = () => {
               circulatingSupply={token.circulatingSupply}
               symbol={token.symbol}
             />
+            {token.resources && token.resources.length > 0 ? (
+              <MainFacts resources={token.resources} />
+            ) : null}
           </>
         ) : (
           <>
@@ -257,6 +263,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#00000080',
     fontSize: 12,
+    paddingTop: 12,
   },
   confettiOverlay: {
     ...StyleSheet.absoluteFillObject,

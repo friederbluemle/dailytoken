@@ -30,6 +30,9 @@ export async function getDailyToken(): Promise<DailyToken> {
     chainId: json.chainId ?? 1,
     priceUsd: json.price ?? 0,
     changePct: json.priceChangePercentage ?? 0,
+    resources: Array.isArray(json.resources)
+      ? json.resources.filter((r: any) => r && r.title && r.url)
+      : undefined,
   };
   return token;
 }
