@@ -11,10 +11,11 @@ interface FactProps {
 }
 
 const FactRow: React.FC<FactProps> = ({title, url}) => {
+  const displayUrl = url && url.length > 46 ? `${url.slice(0, 46)}…` : url;
   const content = (
     <View style={styles.factRow}>
       <Text style={styles.factText}>{title}</Text>
-      <Text style={styles.factSubtitle}>{url}</Text>
+      <Text style={styles.factSubtitle}>{displayUrl}</Text>
     </View>
   );
   if (!url) {
