@@ -12,6 +12,7 @@ import LottieView from 'lottie-react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {DailyHeader, RevealCard, TokenCard} from '../components';
+import {TokenStats} from '../components/TokenStats';
 import {getDailyToken} from '../services/client';
 import {buildMatchaTradeUrl} from '../utils';
 
@@ -51,6 +52,12 @@ export const HomeScreen = () => {
     changePct: number;
     contractAddress: string;
     chainSlug: string;
+    marketCapUsd?: number;
+    fdvUsd?: number;
+    volumeUsd?: number;
+    totalSupply?: number;
+    circulatingSupply?: number;
+    holdersCount?: number;
   } | null>(null);
 
   const handleReveal = async () => {
@@ -65,6 +72,12 @@ export const HomeScreen = () => {
         changePct: data.changePct,
         contractAddress: data.contractAddress,
         chainSlug: data.chainSlug,
+        marketCapUsd: data.marketCapUsd,
+        fdvUsd: data.fdvUsd,
+        volumeUsd: data.volumeUsd,
+        totalSupply: data.totalSupply,
+        circulatingSupply: data.circulatingSupply,
+        holdersCount: data.holdersCount,
       });
       setShowConfetti(true);
       setRemainingMs(msUntilNextUtcMidnight());
@@ -161,17 +174,26 @@ export const HomeScreen = () => {
                 }}
               />
             </Animated.View>
+            {token && time?.label ? (
+              <Text style={styles.countdown} accessibilityLiveRegion="polite">
+                {time.label}
+              </Text>
+            ) : null}
+            <TokenStats
+              marketCapUsd={token.marketCapUsd}
+              volumeUsd={token.volumeUsd}
+              fdvUsd={token.fdvUsd}
+              holdersCount={token.holdersCount}
+              totalSupply={token.totalSupply}
+              circulatingSupply={token.circulatingSupply}
+              symbol={token.symbol}
+            />
           </>
         ) : (
           <>
             <RevealCard loading={loading} onReveal={handleReveal} />
           </>
         )}
-        {token && time?.label ? (
-          <Text style={styles.countdown} accessibilityLiveRegion="polite">
-            {time.label}
-          </Text>
-        ) : null}
         <View style={{height: 8}} />
       </ScrollView>
       <View style={styles.footer}>
