@@ -1,10 +1,13 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {
+  Alert,
   Animated,
   Linking,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
+  ToastAndroid,
   View,
 } from 'react-native';
 
@@ -175,6 +178,12 @@ export const HomeScreen = () => {
                     token.chainId,
                   );
                   if (!url) {
+                    const msg = 'This token is not supported on Matcha yet.';
+                    if (Platform.OS === 'android') {
+                      ToastAndroid.show(msg, ToastAndroid.SHORT);
+                    } else {
+                      Alert.alert('Not supported yet', msg);
+                    }
                     return;
                   }
                   try {
