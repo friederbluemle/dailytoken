@@ -49,10 +49,6 @@ export async function getDailyToken(): Promise<DailyToken> {
   const priceUsd = json.price ?? 0;
   const changePct = json.priceChangePercentage ?? 0;
 
-  if (!contractAddress) {
-    throw new Error('Missing contract address in API response');
-  }
-
   return {
     id,
     name,
