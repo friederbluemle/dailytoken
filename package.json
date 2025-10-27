@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "version": "rn-version-sync && git add -u"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.2.0",
@@ -44,6 +45,7 @@
     "prettier": "2.8.8",
     "react-native-svg-transformer": "^1.5.1",
     "react-test-renderer": "18.3.1",
+    "rn-version-sync": "^0.1.1",
     "typescript": "5.0.4"
   },
   "engines": {

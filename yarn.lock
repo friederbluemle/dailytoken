@@ -2909,7 +2909,7 @@ command-exists@^1.2.8:
   resolved "https://registry.yarnpkg.com/command-exists/-/command-exists-1.2.9.tgz#c50725af3808c8ab0260fd60b01fbfa25b954f69"
   integrity sha512-LTQ/SGc+s0Xc0Fu5WaKnR0YiygZkm9eKFvyS+fRsU7/ZWFF8ykFM6Pc9aCVf1+xasOOZpO3BAVgVrKvsqKHV7w==
 
-commander@^12.0.0:
+commander@^12.0.0, commander@^12.1.0:
   version "12.1.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-12.1.0.tgz#01423b36f501259fdaac4d0e4d60c96c991585d3"
   integrity sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==
@@ -6350,6 +6350,13 @@ rimraf@~2.6.2:
   integrity sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==
   dependencies:
     glob "^7.1.3"
+
+rn-version-sync@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/rn-version-sync/-/rn-version-sync-0.1.1.tgz#38ca6d2d8ab680ab9250646dcf76a6414ce56226"
+  integrity sha512-/E7muvrdbK+Mis7Zq0uB6CG/2WqhSdArNW+HmnFKPaq2YFXjqeft63O5Cn4RLfGQ+9ncgcBeCF+SYtdvCmTvTA==
+  dependencies:
+    commander "^12.1.0"
 
 run-parallel@^1.1.9:
   version "1.2.0"
