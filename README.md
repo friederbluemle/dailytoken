@@ -55,6 +55,15 @@ Run the tests with:
 yarn test
 ```
 
+## Contributing
+
+See [CONTRIBUTING.md][5] for details.
+
+## License
+
+MIT
+
 [1]: https://github.com/fbluemle/dailytoken/workflows/ci/badge.svg
 [2]: https://github.com/fbluemle/dailytoken/actions
 [4]: https://reactnative.dev/docs/environment-setup
+[5]: ./CONTRIBUTING.md
