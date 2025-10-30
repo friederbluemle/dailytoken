@@ -109,6 +109,8 @@ android {
     }
     buildTypes {
         debug {
+            applicationIdSuffix ".debug"
+            resValue "string", "app_name", "Daily Token (Debug)"
             signingConfig signingConfigs.debug
         }
         release {
