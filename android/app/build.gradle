@@ -87,6 +87,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 403
         versionName "0.4.3"
+        setProperty("archivesBaseName", "dailytoken")
     }
     signingConfigs {
         debug {
@@ -109,6 +110,8 @@ android {
     }
     buildTypes {
         debug {
+            applicationIdSuffix ".debug"
+            resValue "string", "app_name", "Daily Token (Debug)"
             signingConfig signingConfigs.debug
         }
         release {
@@ -117,6 +120,21 @@ android {
             }
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+    // Assign deterministic and unique names to APK and AAB file outputs
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach { output ->
+            def name = output.outputFile.name.replace(".apk", "-${variant.versionName}.apk")
+            output.outputFileName = name
+        }
+        tasks.named("bundle${variant.name.capitalize()}").configure {
+            def aabName = "${project.archivesBaseName}-${variant.name}-${variant.versionName}.aab"
+            doLast {
+                def aabDir = layout.buildDirectory.dir("outputs/bundle/${variant.name}").get().asFile
+                def aabFile = aabDir.listFiles()?.find { it.name.endsWith('.aab') }
+                aabFile?.renameTo(new File(aabFile.parent, aabName))
+            }
         }
     }
 }
