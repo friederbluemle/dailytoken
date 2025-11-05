@@ -85,8 +85,8 @@ android {
         applicationId "org.fbluemle.dailytoken"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 403
-        versionName "0.4.3"
+        versionCode 404
+        versionName "0.4.4"
         setProperty("archivesBaseName", "dailytoken")
     }
     signingConfigs {
