@@ -1,0 +1,26 @@
+name: build-android
+on: workflow_call
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - run: yarn --frozen-lockfile
+      - run: echo "${{ secrets.ANDROID_KEYSTORE_B64 }}" | base64 -d > android/app/dailytoken-upload.keystore
+      - run: ./gradlew assembleRelease -PstoreFile=dailytoken-upload.keystore -PstorePassword=${{ secrets.ANDROID_STORE_PW }} -PkeyAlias=upload -PkeyPassword=${{ secrets.ANDROID_KEY_PW }}
+        working-directory: android
+      - run: ./gradlew bundleRelease -PstoreFile=dailytoken-upload.keystore -PstorePassword=${{ secrets.ANDROID_STORE_PW }} -PkeyAlias=upload -PkeyPassword=${{ secrets.ANDROID_KEY_PW }}
+        working-directory: android
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android-artifacts
+          path: |
+            android/app/build/outputs/apk/release/
+            android/app/build/outputs/bundle/release/
