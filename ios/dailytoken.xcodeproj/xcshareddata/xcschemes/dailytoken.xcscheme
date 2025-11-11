@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "dailytokenTests.xctest"
+               BuildableName = "dailytokenTests"
                BlueprintName = "dailytokenTests"
                ReferencedContainer = "container:dailytoken.xcodeproj">
             </BuildableReference>
