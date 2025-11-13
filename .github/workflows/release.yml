@@ -24,10 +24,9 @@ jobs:
           name: ios-artifacts
           path: ios-artifacts
       - run: |
-          shopt -s globstar
-          gh release create "${GITHUB_REF_NAME}" --draft --generate-notes --title "${GITHUB_REF_NAME#v}" \
-            android-artifacts/**/*.apk \
-            android-artifacts/**/*.aab \
-            ios-artifacts/**/*.ipa
+          files=$(find android-artifacts ios-artifacts -type f \( \
+            -name '*.apk' -o -name '*.aab' -o -name '*.ipa' -o \
+            -name '*.bundle' -o -name '*.map' -o -name '*.txt' \))
+          gh release create "${GITHUB_REF_NAME}" --draft --generate-notes --title "${GITHUB_REF_NAME#v}" $files
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
