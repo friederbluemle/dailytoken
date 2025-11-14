@@ -26,7 +26,7 @@ jobs:
       - run: |
           files=$(find android-artifacts ios-artifacts -type f \( \
             -name '*.apk' -o -name '*.aab' -o -name '*.ipa' -o \
-            -name '*.bundle' -o -name '*.map' -o -name '*.txt' \))
+            -name '*.bundle' -o -name '*.jsbundle' -o -name '*.map' -o -name '*.txt' \))
           gh release create "${GITHUB_REF_NAME}" --draft --generate-notes --title "${GITHUB_REF_NAME#v}" $files
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
